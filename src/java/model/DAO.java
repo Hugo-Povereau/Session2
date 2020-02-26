@@ -81,6 +81,18 @@ public class DAO {
 		}
 		return result;
 	}
+        
+        void UpdateDiscountCode(char cle, float taux) throws SQLException {
+        String sql = "UPDATE APP.DISCOUNT_CODE SET RATE = ? WHERE DISCOUNT_CODE = ?";
+        try (Connection connection = myDataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setFloat(1, taux);
+            stmt.setString(2, String.valueOf(cle));
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
 
 
 }
